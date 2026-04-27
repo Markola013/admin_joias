@@ -5,9 +5,9 @@ import { NextRequest, NextResponse } from 'next/server';
 // PUT - EDITAR
 export async function PUT(
   req: NextRequest, 
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> } // Correção aqui
 ) {
-  const { id } = await params; // Aguarda a resolução dos parâmetros
+  const { id } = await params; // Correção aqui
   const body = await req.json();
   const parsed = joiaSchema.safeParse(body);
 
@@ -33,7 +33,6 @@ export async function PUT(
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Erro ao atualizar:', error);
     return NextResponse.json({ error: 'Erro ao atualizar' }, { status: 500 });
   }
 }
@@ -41,15 +40,14 @@ export async function PUT(
 // DELETE
 export async function DELETE(
   _: NextRequest, 
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> } // Correção aqui
 ) {
-  const { id } = await params; // Aguarda a resolução dos parâmetros
+  const { id } = await params; // Correção aqui
   
   try {
     await sql`DELETE FROM joias WHERE id = ${id}`;
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Erro ao deletar:', error);
     return NextResponse.json({ error: 'Erro ao deletar' }, { status: 500 });
   }
 }
